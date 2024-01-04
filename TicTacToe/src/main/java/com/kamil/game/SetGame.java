@@ -19,15 +19,15 @@ public class SetGame {
 
     public void setParticipants(){
         int numberOfPlayers = Console.getInputInt("How many players will be played?");
-        for (int i=0; i<numberOfPlayers; i++){
-            String name = Console.getInput("Please provide name for player " +i+1);
-            String sign = Console.getInput("Please provide sign for player " + i+1);
+        for (int i=1; i<=numberOfPlayers; i++){
+            String name = Console.getInput("Please provide name for player " + i);
+            String sign = Console.getInput("Please provide sign for player " + i);
             players.add(new Player(name, sign));
         }
     }
 
     public void setBoard(){
-        int sizeOfBoard = Console.getInputInt("Specify size of board?");
+        int sizeOfBoard = Console.getInputInt("Specify size of board: ");
         this.board = new Board(sizeOfBoard);
     }
 
