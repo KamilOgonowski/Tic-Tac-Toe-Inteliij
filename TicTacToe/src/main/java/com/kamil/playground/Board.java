@@ -7,7 +7,18 @@ import java.util.List;
 public class Board {
 
     public List<Row> rows = new ArrayList<>();
+
+    public int getSize() {
+        return size;
+    }
+
+    public void setSize(int size) {
+        this.size = size;
+    }
+
+    int size;
      public Board(int size){
+         this.size = size;
          for(int i = 0; i < size; i++){
              rows.add(new Row(size));
          }
@@ -29,5 +40,26 @@ public class Board {
          }
     }
 
+    public Field selectField(int row, int column){
+         row-=1;
+         column-=1;
 
-}
+//         Field fieldToUpdate = rows.get(row).get(column);
+         Row rowToUpdate = rows.get(row);
+         Field fieldToUpdate = rowToUpdate.fields.get(column);
+         return fieldToUpdate;
+
+//         for(int i = 1; i<=row;i++){
+//             if(i==row){
+//                 rows.get()
+//             }
+
+         }
+
+
+
+
+    }
+
+
+

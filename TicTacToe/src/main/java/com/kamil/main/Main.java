@@ -1,5 +1,6 @@
 package com.kamil.main;
 
+import com.kamil.game.RunGame;
 import com.kamil.game.SetGame;
 import com.kamil.playground.Board;
 import com.kamil.playground.Row;
@@ -14,6 +15,11 @@ public class Main {
         game.showPlayers();
         game.showBoard();
 
+        game.playYourTurn();
+
+//        RunGame gamePlay = new RunGame();
+//        gamePlay.setGame.showPlayers();
+//        gamePlay.setGame.showBoard();
 
 
 
