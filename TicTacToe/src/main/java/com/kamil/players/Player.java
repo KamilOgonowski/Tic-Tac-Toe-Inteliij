@@ -39,6 +39,6 @@ public class Player {
     }
 
     public String getFieldSelection(){
-        return Console.getInput("Please provide field you want to make move on").trim();
+        return Console.getInput("Please indicate the field you want to mark").trim();
     }
 }

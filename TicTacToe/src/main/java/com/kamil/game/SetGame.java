@@ -28,7 +28,7 @@ public class SetGame {
     }
 
     public void setBoard(){
-        int sizeOfBoard = Console.getInputInt("Specify size of board: ");
+        int sizeOfBoard = Console.getInputInt("Specify size of board");
         this.board = new Board(sizeOfBoard);
     }
 
@@ -42,13 +42,16 @@ public class SetGame {
     }
 
     public void playYourTurn(){
-        for(Player player : players){
-            showBoard();
-            System.out.println(player.getName() + " your turn!");
-            int rowIndex = Console.getInputInt("Please provide row (1-" + board.getSize()+"): ");
-            int columnIndex = Console.getInputInt("Please provide column (1-" + board.getSize()+"): ");
-            Field fieldToBeUpdated = board.selectField(rowIndex,columnIndex);
-            fieldToBeUpdated.setSign(player.getSign());
+        while(true){
+            for(Player player : players){
+                showBoard();
+                System.out.println(player.getName() + " your turn!");
+                int rowIndex = Console.getInputInt("Please provide row (1-" + board.getSize()+")");
+                int columnIndex = Console.getInputInt("Please provide column (1-" + board.getSize()+")");
+                Field fieldToBeUpdated = board.selectField(rowIndex,columnIndex);
+                fieldToBeUpdated.setSign("["+player.getSign()+"]");
+            }
         }
+
     }
 }

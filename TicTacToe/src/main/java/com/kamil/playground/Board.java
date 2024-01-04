@@ -44,21 +44,11 @@ public class Board {
          row-=1;
          column-=1;
 
-//         Field fieldToUpdate = rows.get(row).get(column);
+
          Row rowToUpdate = rows.get(row);
          Field fieldToUpdate = rowToUpdate.fields.get(column);
          return fieldToUpdate;
-
-//         for(int i = 1; i<=row;i++){
-//             if(i==row){
-//                 rows.get()
-//             }
-
          }
-
-
-
-
     }
 
 
