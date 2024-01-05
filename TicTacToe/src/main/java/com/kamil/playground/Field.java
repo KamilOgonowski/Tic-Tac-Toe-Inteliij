@@ -3,6 +3,7 @@ package com.kamil.playground;
 public class Field {
 
     String sign = "[ ]";
+    boolean selected = false;  //possibility to check based on status
 
     public String getSign() {
         return sign;

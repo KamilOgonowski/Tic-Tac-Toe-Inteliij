@@ -3,6 +3,7 @@ package com.kamil.game;
 import com.kamil.players.Player;
 import com.kamil.playground.Board;
 import com.kamil.playground.Field;
+import com.kamil.playground.Row;
 import com.kamil.util.Console;
 
 import java.util.ArrayList;
@@ -41,8 +42,9 @@ public class SetGame {
             System.out.println(player);
     }
 
-    public void playYourTurn(){
-        while(true){
+    public void playGame(){
+        boolean continuePlay = true;
+        while(continuePlay){
             for(Player player : players){
                 showBoard();
                 System.out.println(player.getName() + " your turn!");
@@ -50,8 +52,48 @@ public class SetGame {
                 int columnIndex = Console.getInputInt("Please provide column (1-" + board.getSize()+")");
                 Field fieldToBeUpdated = board.selectField(rowIndex,columnIndex);
                 fieldToBeUpdated.setSign("["+player.getSign()+"]");
+                if(hasWon(player)) {
+                    continuePlay=false;
+                    break;
+                }
             }
         }
+    }
+
+    public boolean hasWon(Player player){
+
+        int result = 0;
+        System.out.println("I am checking if there is a winner. Current player: " +player.getName() +" has " + result + " points." );
+        String playerSign = "["+player.getSign()+"]";
+
+        for(Row row : board.rows){
+            for(int i =0; i<board.getSize(); i++){
+                if(row.fields.get(i).getSign().equals(playerSign)){
+                    result+=1;
+                    i+=1;
+                    if(row.fields.get(i).getSign().equals(playerSign)){
+                        result+=1;
+                        i+=1;
+                        if(row.fields.get(i).getSign().equals(playerSign)){
+                            result+=1;
+                            if(result==3){
+                                System.out.println(player.getName() + " has won and has " + result + " points");
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        System.out.println("I am checking if there is a winner. Current player: " +player.getName() +" has " + result + " points." );
+        return false;
+    }
+
+    public boolean selectedByPlayer(){
+
+
+        return false;
 
     }
+
 }

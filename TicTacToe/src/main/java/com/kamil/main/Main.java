@@ -8,6 +8,6 @@ public class Main {
 
         SetGame game = new SetGame();
         game.showPlayers();
-        game.playYourTurn();
+        game.playGame();
     }
 }
