@@ -52,7 +52,8 @@ public class SetGame {
                 int columnIndex = Console.getInputInt("Please provide column (1-" + board.getSize()+")");
                 Field fieldToBeUpdated = board.selectField(rowIndex,columnIndex);
                 fieldToBeUpdated.setSign("["+player.getSign()+"]");
-                if(hasWon(player)) {
+                if(hasWon(player) || hasWonVertically(player)) {
+                    showBoard();
                     continuePlay=false;
                     break;
                 }
@@ -60,7 +61,7 @@ public class SetGame {
         }
     }
 
-
+//for iteration through columns it might be a good idea to replace axis X by Y, to use the same mechanism, but I will try to go with two approaches
     public boolean hasWon(Player player){
 
         int result = 0;
@@ -84,5 +85,24 @@ public class SetGame {
         return false;
     }
 
+    public boolean hasWonVertically(Player player){
+        int result=0;
+        System.out.println("I am checking if " + player.getName() + " has won the game.");
+        String playerSign = "["+player.getSign()+"]";  // make a change in relation to the sign used in field //move it later up
 
+        for(int i = 0; i<board.getSize(); i++){
+            for (Row row : board.rows){
+                if(row.fields.get(i).getSign().equals(playerSign)){
+                    result+=1;
+                }else{
+                    result=0;
+                }
+                if(result==3){
+                    System.out.println(player.getName() + " has won and has " + result + " points");
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
