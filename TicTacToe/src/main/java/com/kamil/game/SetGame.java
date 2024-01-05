@@ -105,4 +105,41 @@ public class SetGame {
         }
         return false;
     }
+
+    public boolean hasWonDiagonally(Player player){
+        int result=0;
+        int columnLeftDirection = 0;
+        System.out.println("I am checking if " + player.getName() + " has won the game.");
+        String playerSign = "["+player.getSign()+"]";  // make a change in relation to the sign used in field //move it later up
+
+        for(Row row : board.rows){
+            for(int column = columnLeftDirection; column< board.getSize(); column++){
+                if(row.fields.get(column).getSign().equals(playerSign)){
+                    result+=1;
+                    if(columnLeftDirection-1>=0){
+                        columnLeftDirection-=1;
+                    }
+
+                }
+            }
+//            column=0;
+
+        }
+        return false;
+    }
+    public boolean diagonallyLeft(){
+        return false;
+
+    }
+
+    /*
+    -> if hasWonDiagonally find a sign matching player then invoke diagonallyLeft and diagonallyRight
+    -> diagonLeft need index of row where the sign has been found to reduce it by 1 (if this is still bigger than 0)
+    -> diagonLeft needs index of column where the sign was found to reduce it by 1 (if this is still bigger than 0)
+    -> it needs to check whether the field having this new coordinates has been selected by the player (has its sign)
+       if yes point should be added and another invoke of diagonLeft(), otherwise the points should be removed, and
+       iteration should be continued inner loop through columns/fields, and outer loop through rows.
+    -> when player sign will be found once again check should be performed
+
+     */
 }
