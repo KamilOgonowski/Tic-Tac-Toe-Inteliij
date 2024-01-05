@@ -60,40 +60,29 @@ public class SetGame {
         }
     }
 
+
     public boolean hasWon(Player player){
 
         int result = 0;
-        System.out.println("I am checking if there is a winner. Current player: " +player.getName() +" has " + result + " points." );
-        String playerSign = "["+player.getSign()+"]";
+        System.out.println("I am checking if " + player.getName() + " has won the game.");
+        String playerSign = "["+player.getSign()+"]";  // make a change in relaiton to the sign used in field
 
         for(Row row : board.rows){
             for(int i =0; i<board.getSize(); i++){
-                if(row.fields.get(i).getSign().equals(playerSign)){
-                    result+=1;
-                    i+=1;
-                    if(row.fields.get(i).getSign().equals(playerSign)){
-                        result+=1;
-                        i+=1;
-                        if(row.fields.get(i).getSign().equals(playerSign)){
-                            result+=1;
-                            if(result==3){
-                                System.out.println(player.getName() + " has won and has " + result + " points");
-                                return true;
+                if(row.fields.get(i).getSign().equals(playerSign)) {
+                    result += 1;
+                }else
+                    result=0;
+
+                if(result==3){
+                    System.out.println(player.getName() + " has won and has " + result + " points");
+                    return true;
                             }
                         }
                     }
-                }
-            }
-        }
-        System.out.println("I am checking if there is a winner. Current player: " +player.getName() +" has " + result + " points." );
+        System.out.println("No win after this round for " + player.getName());
         return false;
     }
 
-    public boolean selectedByPlayer(){
-
-
-        return false;
-
-    }
 
 }
