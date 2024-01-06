@@ -41,8 +41,7 @@ public class Board {
     }
 
     public Field selectField(int row, int column){
-         row-=1;
-         column-=1;
+
 
 
          Row rowToUpdate = rows.get(row);
