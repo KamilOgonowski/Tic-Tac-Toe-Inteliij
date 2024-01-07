@@ -18,7 +18,7 @@ public class Player {
     }
 
     public void setSign(String sign) {
-        this.sign = sign;
+        this.sign = "["+sign+"]";
     }
 
     String name;

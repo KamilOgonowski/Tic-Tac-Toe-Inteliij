@@ -11,7 +11,7 @@ public class SetGame {
     Board board;
     List<Player> players = new ArrayList<>();
     Player playerPlayingThisTurn;
-    int pointsRequiredToWin = 3; // hardcoded, but later -> to be set by player, or based on board size -> not decided yet
+    int pointsRequiredToWin; // hardcoded, but later -> to be set by player, or based on board size -> not decided yet
 
 
     public SetGame() {
@@ -22,6 +22,7 @@ public class SetGame {
     public void setBoard() {
         int sizeOfBoard = Console.getInputInt("Specify size of board");
         this.board = new Board(sizeOfBoard);
+        setPointsRequiredToWin();
     }
 
     public void setParticipants() {
@@ -29,8 +30,13 @@ public class SetGame {
         for (int i = 1; i <= numberOfPlayers; i++) {
             String name = Console.getInput("Please provide name for player " + i);
             String sign = Console.getInput("Please provide sign for player " + i);
+            sign = "["+sign+"]";
             players.add(new Player(name, sign));
         }
+    }
+
+    public void setPointsRequiredToWin(){
+        pointsRequiredToWin = Console.getInputInt("How many points are needed to win the game? Maximum value you can set is: " + board.getSize());
     }
 
     public void showPlayers() {
@@ -47,8 +53,9 @@ public class SetGame {
                 System.out.println(player.getName() + " your turn!");
                 int rowIndex = Console.getInputInt("Please provide row (1-" + board.getSize() + ")") - 1;
                 int columnIndex = Console.getInputInt("Please provide column (1-" + board.getSize() + ")") - 1;
+
                 Field fieldToBeUpdated = board.selectField(rowIndex, columnIndex);
-                fieldToBeUpdated.setSign("[" + player.getSign() + "]"); // overwrite to have it cone without concat
+                fieldToBeUpdated.setSign(player.getSign()); // overwrite to have it cone without concat
 
                 if (scanTheBoard()) {
                     board.showBoard();
@@ -64,7 +71,7 @@ public class SetGame {
         boolean winner = false; // added for better readability
         for (int row = 0; row < board.getSize(); row++) {
             for (int column = 0; column < board.getSize(); column++) {
-                if (board.selectField(row, column).getSign().equals("[" + playerPlayingThisTurn.getSign() + "]")) {
+                if (board.selectField(row, column).getSign().equals(playerPlayingThisTurn.getSign())) {
                     if (hasWonTheGame(row, column)) {
                         winner = true;
                         return winner;
@@ -74,6 +81,34 @@ public class SetGame {
         }
         return winner;
     }
+
+//    public boolean checkIfFieldSelected(Field field){
+//        if (field.isSelected()){
+//            System.out.println("This field has been already used");
+//            return true;
+//        }
+//        return false;
+//    }
+//
+//    public boolean selectionSuccessful(){
+//
+//        for (int i = 0; i >3; i++){
+//            Field field = selectField();
+//            if (!checkIfFieldSelected(field)){
+//
+//            }
+//        }
+//
+//
+//    }
+//    public Field selectField(){
+//        int counter = 1;
+//        int rowIndex = Console.getInputInt("Please provide row (1-" + board.getSize() + ")") - 1;
+//        int columnIndex = Console.getInputInt("Please provide column (1-" + board.getSize() + ")") - 1;
+//
+//        return board.selectField(rowIndex, columnIndex);
+//    }
+
 
     public boolean hasWonTheGame(int row, int column) {
         if (hasWonHorizontally(row, column) || hasWonVertically1(row, column) || hasWonDiagonally1(row, column)) { // || hasWonDiagonally1(row, column))
@@ -89,7 +124,7 @@ public class SetGame {
         for (int i = remainingPoints; i > 0; i--) {
             if (columnToBeChecked + 1 < board.getSize()) { // check if the potential increase is still in range of board's size
                 columnToBeChecked += 1;
-                if (board.selectField(row, columnToBeChecked).getSign().equals("[" + playerPlayingThisTurn.getSign() + "]")) {
+                if (board.selectField(row, columnToBeChecked).getSign().equals(playerPlayingThisTurn.getSign())) {
                     continue; // better readability - temporary
                 } else
                     return false;
@@ -108,7 +143,7 @@ public class SetGame {
         for (int i = remainingPoints; i > 0; i--) {
             if (rowToBeChecked + 1 < board.getSize()) { // check if the potential increase is still in range of board's size
                 rowToBeChecked += 1;
-                if (board.selectField(rowToBeChecked, column).getSign().equals("[" + playerPlayingThisTurn.getSign() + "]")) {
+                if (board.selectField(rowToBeChecked, column).getSign().equals(playerPlayingThisTurn.getSign())) {
                     continue; // better readability - temporary
                 } else
                     return false;
@@ -133,7 +168,7 @@ public class SetGame {
             if (rowToBeChecked + 1 < board.getSize() && columnToBeChecked - 1 >= 0) { // check if the potential increase is still in range of board's size
                 rowToBeChecked += 1;
                 columnToBeChecked -= 1;
-                if (board.selectField(rowToBeChecked, columnToBeChecked).getSign().equals("[" + playerPlayingThisTurn.getSign() + "]")) {
+                if (board.selectField(rowToBeChecked, columnToBeChecked).getSign().equals(playerPlayingThisTurn.getSign())) {
                     continue; // better readability - temporary
                 } else
                     return false;
@@ -154,7 +189,7 @@ public class SetGame {
             if (rowToBeChecked + 1 < board.getSize() && columnToBeChecked + 1 < board.getSize()) { // check if the potential increase is still in range of board's size
                 rowToBeChecked += 1;
                 columnToBeChecked += 1;
-                if (board.selectField(rowToBeChecked, columnToBeChecked).getSign().equals("[" + playerPlayingThisTurn.getSign() + "]")) {
+                if (board.selectField(rowToBeChecked, columnToBeChecked).getSign().equals(playerPlayingThisTurn.getSign())) {
                     continue; // better readability - temporary
                 } else
                     return false;
