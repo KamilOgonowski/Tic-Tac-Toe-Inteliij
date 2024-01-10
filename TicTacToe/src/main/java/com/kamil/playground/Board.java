@@ -41,12 +41,9 @@ public class Board {
     }
 
     public Field selectField(int row, int column){
-
-
-
          Row rowToUpdate = rows.get(row);
-         Field fieldToUpdate = rowToUpdate.fields.get(column);
-         return fieldToUpdate;
+         Field fieldToBeUpdated  = rowToUpdate.fields.get(column);
+         return fieldToBeUpdated ;
          }
     }
 
