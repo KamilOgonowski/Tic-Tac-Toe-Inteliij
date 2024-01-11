@@ -13,9 +13,10 @@ public class Console {
     }
 
     public static int getInputInt(String prompt) {
-        int number = -1; // add check if returend value == -1 -> close the game
+        int number = -1; // add check if returned value == -1 -> close the game
         int attempts = 3;
-        for (int attempt = 1; attempt <= attempts; attempt++) {
+        int attempt;
+        for (attempt = 1; attempt <= attempts; attempt++) {
             if (attempt == 2) {
                 System.out.println("Try once again");
             }
@@ -31,11 +32,20 @@ public class Console {
                 }
             } catch (InputMismatchException e) {
                 System.out.println("The value you have provided is not a whole number!");
-                scanner.hasNextLine();
+                scanner.nextLine();
+                if(attempt!=3){
+                    continue;
+                }else
+                    return -1;
             } catch (Exception e) {
                 System.out.println("Something went wrong!");
                 e.printStackTrace();
+                if(attempt!=3){
+                    continue;
+                }else
+                    return -1;
             }
+            break;
         }
         return number;
     }

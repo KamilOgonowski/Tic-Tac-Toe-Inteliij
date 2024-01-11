@@ -27,5 +27,9 @@ public class Field {
         this.selected = selected;
     }
 
+    public void selectField(){
+        this.selected = true;
+    }
+
 
 }

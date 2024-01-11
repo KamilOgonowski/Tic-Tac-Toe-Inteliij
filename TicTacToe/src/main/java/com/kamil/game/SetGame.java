@@ -51,11 +51,37 @@ public class SetGame {
                 playerPlayingThisTurn = player; // just added to fields
                 board.showBoard();
                 System.out.println(player.getName() + " your turn!");
-                int rowIndex = Console.getInputInt("Please provide row (1-" + board.getSize() + ")") - 1;
-                int columnIndex = Console.getInputInt("Please provide column (1-" + board.getSize() + ")") - 1;
 
-                Field fieldToBeUpdated = board.selectField(rowIndex, columnIndex);
-                fieldToBeUpdated.setSign(player.getSign()); // overwrite to have it cone without concat
+//                int rowIndex = Console.getInputInt("Please provide row (1-" + board.getSize() + ")");// - 1;
+//                if (rowIndex==-1){
+//                    System.out.println("The user has not provided correct value in three attempts.\nThe application has been closed");
+//                    continuePlay=false;
+//                    break;
+//                }
+//                int columnIndex = Console.getInputInt("Please provide column (1-" + board.getSize() + ")"); // - 1;
+//                if(columnIndex==-1){
+//                    System.out.println("The user has not provided correct value in three attempts.\nThe application has been closed");
+//                    continuePlay=false;
+//                    break;
+//                }
+
+
+
+//                Field fieldToBeUpdated = board.selectField(rowIndex, columnIndex);
+//                if(fieldToBeUpdated.isSelected())
+//                fieldToBeUpdated.selectField(); // for additional check
+//
+//                selectField();
+//                fieldToBeUpdated.setSign(player.getSign()); // overwrite to have it cone without concat
+//
+                if(!selectField()){
+                    System.out.println("Player: " + playerPlayingThisTurn + " has not provided correct value in three attempts.\nThe application has been closed");
+                    continuePlay=false;
+                    break;
+                }
+
+
+
 
                 if (scanTheBoard()) {
                     board.showBoard();
@@ -82,6 +108,33 @@ public class SetGame {
         return winner;
     }
 
+
+
+
+    public boolean selectField(){
+        while(true){
+            int counter = 3;
+            int rowIndex = Console.getInputInt("Please provide row (1-" + board.getSize() + ")");// - 1;
+            if (rowIndex==-1){
+//                System.out.println("The user has not provided correct value in three attempts.\nThe application has been closed");
+                return false;
+            }
+            int columnIndex = Console.getInputInt("Please provide column (1-" + board.getSize() + ")"); // - 1;
+            if(columnIndex==-1){
+//                System.out.println("The user has not provided correct value in three attempts.\nThe application has been closed");
+                return false;
+            }
+
+            Field fieldToBeUpdated = board.selectField(rowIndex-1, columnIndex-1);
+            if(fieldToBeUpdated.isSelected()) {
+                System.out.println("The field you chose has been already selected - please try again");
+                continue;
+            }
+            fieldToBeUpdated.selectField(); // for additional check
+            fieldToBeUpdated.setSign(playerPlayingThisTurn.getSign());
+            return true;
+        }
+    }
 //    public boolean checkIfFieldSelected(Field field){
 //        if (field.isSelected()){
 //            System.out.println("This field has been already used");
