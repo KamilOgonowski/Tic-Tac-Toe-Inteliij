@@ -23,11 +23,11 @@ public class Field {
         return selected;
     }
 
-    public void setSelected(boolean selected) {
-        this.selected = selected;
-    }
+//    public void setSelected(boolean selected) {
+//        this.selected = selected;
+//    }
 
-    public void selectField(){
+    public void setSelected(){
         this.selected = true;
     }
 

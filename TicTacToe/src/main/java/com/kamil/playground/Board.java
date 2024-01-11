@@ -42,8 +42,7 @@ public class Board {
 
     public Field selectField(int row, int column){
          Row rowToUpdate = rows.get(row);
-         Field fieldToBeUpdated  = rowToUpdate.fields.get(column);
-         return fieldToBeUpdated ;
+         return rowToUpdate.fields.get(column);
          }
     }
 
