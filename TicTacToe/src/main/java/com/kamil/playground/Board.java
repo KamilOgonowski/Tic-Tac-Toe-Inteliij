@@ -7,6 +7,16 @@ import java.util.List;
 public class Board {
 
     public List<Row> rows = new ArrayList<>();
+    int size;
+    int fieldsWhichCanBeSelected;
+
+    public int getFieldsWhichCanBeSelected() {
+        return fieldsWhichCanBeSelected;
+    }
+
+    public void setFieldsWhichCanBeSelected(int fieldsWhichCanBeSelected) {
+        this.fieldsWhichCanBeSelected = fieldsWhichCanBeSelected;
+    }
 
     public int getSize() {
         return size;
@@ -16,7 +26,7 @@ public class Board {
         this.size = size;
     }
 
-    int size;
+
      public Board(int size){
          this.size = size;
          for(int i = 0; i < size; i++){

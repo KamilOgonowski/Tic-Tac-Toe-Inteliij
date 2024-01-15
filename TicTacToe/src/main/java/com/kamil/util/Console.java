@@ -93,12 +93,4 @@ public class Console {
         }
         return number;
     }
-
-//    public static int getInputInt(String prompt, int limit){
-//        System.out.println(prompt + ": ");
-//        return scanner.nextInt();
-//    }
-
-
-
 }

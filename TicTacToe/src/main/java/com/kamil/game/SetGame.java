@@ -22,6 +22,7 @@ public class SetGame {
     public void setBoard() {
         int sizeOfBoard = Console.getInputInt("Specify size of board");
         this.board = new Board(sizeOfBoard);
+        board.setFieldsWhichCanBeSelected(sizeOfBoard*sizeOfBoard);
         setPointsRequiredToWin();
     }
 
@@ -64,6 +65,12 @@ public class SetGame {
                     System.out.println(player.getName() + " has just won the game!!");
                     break;
                 }
+                if(checkDraw()){
+                    board.showBoard();
+                    System.out.println("All spaces are filled, and no player has won the game. As a result, the game is declared a draw");
+                    continuePlay=false;
+                    break;
+                }
             }
         }
     }
@@ -83,6 +90,9 @@ public class SetGame {
         return winner;
     }
 
+    public boolean checkDraw(){
+        return board.getFieldsWhichCanBeSelected() == 0;
+    }
 
     public boolean selectField(){
         while(true){
@@ -105,6 +115,7 @@ public class SetGame {
             }
             fieldToBeUpdated.setSelected(); // for additional check
             fieldToBeUpdated.setSign(playerPlayingThisTurn.getSign());
+            board.setFieldsWhichCanBeSelected(board.getFieldsWhichCanBeSelected()-1);
             return true;
         }
     }
